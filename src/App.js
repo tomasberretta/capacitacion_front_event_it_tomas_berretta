@@ -1,17 +1,8 @@
 import '@fontsource/roboto';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink
-} from "react-router-dom";
-import SvgIcon from '@material-ui/core/SvgIcon';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
+import { BrowserRouter as Router, Switch, Route, NavLink} from "react-router-dom";
+import {SvgIcon, AppBar, Toolbar, Typography, IconButton} from '@material-ui/core';
 
-import Home from './components/Home'
+import Home from './components/Home';
 import Civilization from './components/Civilization';
 
 function App() {
@@ -42,6 +33,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

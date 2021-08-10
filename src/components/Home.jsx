@@ -1,29 +1,20 @@
 import React from 'react'
-import { Link } from '@material-ui/core';
-import { Container } from '@material-ui/core';
+import { Link, Container, Table, Box, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 const Home = () => {
-
-    const [civilization, setCivilization] = React.useState([])
+    const [civilization, setCivilization] = React.useState([]);
 
     React.useEffect (()=> {
         document.title = 'Home'
         fetchData()
-    }, [])
+    }, []);
 
     const fetchData = async () => {
         const data = await fetch('https://age-of-empires-2-api.herokuapp.com/api/v1/civilizations')
-        const users = await data.json()
-        setCivilization(users.civilizations)
-    }
+        const dataJSON = await data.json()
+        setCivilization(dataJSON.civilizations)
+    };
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -34,26 +25,27 @@ const Home = () => {
         body: {
           fontSize: 16,
         },
-      }))(TableCell);
+    }))(TableCell);
       
-      const StyledTableRow = withStyles((theme) => ({
-        root: {
-          '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-          },
+    const StyledTableRow = withStyles((theme) => ({
+      root: {
+        '&:nth-of-type(odd)': {
+          backgroundColor: theme.palette.action.hover,
         },
-      }))(TableRow);
+      },
+    }))(TableRow);
 
-      const useStyles = makeStyles({
-        table: {
-          minWidth: 300,
-        },
-      });
+    const useStyles = makeStyles({
+      table: {
+        minWidth: 300,
+      },
+    });
 
-      const classes = useStyles();
+    const classes = useStyles();
 
     return ( 
-        <Container maxWidth="sm" >
+        <Box mt={2}>
+          <Container maxWidth="sm" >
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="customized table">
                         <TableHead>
@@ -68,13 +60,15 @@ const Home = () => {
                                 <StyledTableCell component="th" scope="row">
                                     <Link 
                                     href={`/civilization/${row.id}`}
-                                    color="inherit" >{row.id}
+                                    color="inherit" >
+                                      {row.id}
                                     </Link>
                                 </StyledTableCell>
                                 <StyledTableCell align="left">
                                     <Link 
                                     href={`/civilization/${row.id}`}
-                                    color="inherit" >{row.name}
+                                    color="inherit" >
+                                      {row.name}
                                     </Link>
                                 </StyledTableCell>
                             </StyledTableRow>
@@ -83,8 +77,8 @@ const Home = () => {
                     </Table>
                 </TableContainer>
             </Container>
-        
+        </Box>
      );
-}
+};
  
 export default Home;
