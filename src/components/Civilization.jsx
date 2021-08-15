@@ -1,13 +1,13 @@
-import React from 'react';
+import {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, Box, Card, CardContent, Typography } from '@material-ui/core';
 
 function Civilization() {
     const {id} = useParams();
 
-    const [civilization, setCivilization] = React.useState([]);
+    const [civilization, setCivilization] = useState([]);
 
-    React.useEffect (()=> {
+    useEffect (()=> {
         document.title = 'Civilization'
         const fetchData = async () => {
             const data = await fetch(`https://age-of-empires-2-api.herokuapp.com/api/v1/civilization/${id}`)
@@ -42,6 +42,6 @@ function Civilization() {
             </Container>
         </Box>
     );
-};
+}
 
 export default Civilization;

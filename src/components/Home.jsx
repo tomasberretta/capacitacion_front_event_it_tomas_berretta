@@ -1,11 +1,11 @@
-import React from 'react'
+import {useState, useEffect} from 'react'
 import { Link, Container, Table, Box, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 const Home = () => {
-    const [civilization, setCivilization] = React.useState([]);
+    const [civilization, setCivilization] = useState([]);
 
-    React.useEffect (()=> {
+    useEffect (()=> {
         document.title = 'Home'
         fetchData()
     }, []);
@@ -79,6 +79,6 @@ const Home = () => {
             </Container>
         </Box>
      );
-};
+}
  
 export default Home;
