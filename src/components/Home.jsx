@@ -1,9 +1,10 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { Link, Container, Table, Box, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { fetchCivilizations } from "../fetchers/CivilizationFetcher";
 
 const Home = () => {
-    const [civilization, setCivilization] = useState([]);
+    const [civilizations, setCivilizations] = useState([]);
 
     useEffect (()=> {
         document.title = 'Home'
@@ -11,9 +12,8 @@ const Home = () => {
     }, []);
 
     const fetchData = async () => {
-        const data = await fetch('https://age-of-empires-2-api.herokuapp.com/api/v1/civilizations')
-        const dataJSON = await data.json()
-        setCivilization(dataJSON.civilizations)
+            const data = await fetchCivilizations()
+            setCivilizations(data)
     };
 
     const StyledTableCell = withStyles((theme) => ({
@@ -55,7 +55,7 @@ const Home = () => {
                         </TableRow>
                         </TableHead>
                         <TableBody>
-                        {civilization.map((row) => (
+                        {civilizations.map((row) => (
                             <StyledTableRow key={row.id}>
                                 <StyledTableCell component="th" scope="row">
                                     <Link 

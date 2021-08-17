@@ -1,6 +1,7 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { Container, Box, Card, CardContent, Typography } from '@material-ui/core';
+import {fetchCivilization} from "../fetchers/CivilizationFetcher";
 
 function Civilization() {
     const {id} = useParams();
@@ -8,14 +9,15 @@ function Civilization() {
     const [civilization, setCivilization] = useState([]);
 
     useEffect (()=> {
-        document.title = 'Civilization'
+        document.title = 'Civilizations'
         const fetchData = async () => {
-            const data = await fetch(`https://age-of-empires-2-api.herokuapp.com/api/v1/civilization/${id}`)
-            const dataJSON = await data.json()
-            setCivilization(dataJSON)
+            const data = await fetchCivilization(id)
+            setCivilization(data)
+            document.title = civilization.name
         }
         fetchData()
-    }, [id]);
+    }, [id, civilization.name]);
+
 
     return (
         <Box mt={2}>
