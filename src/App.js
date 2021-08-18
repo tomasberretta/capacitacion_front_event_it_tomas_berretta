@@ -2,8 +2,8 @@ import '@fontsource/roboto';
 import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
 import { SvgIcon, AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 
-import Home from './components/Home';
-import Civilization from './components/Civilization';
+import Home from './components/home/home';
+import Civilization from './components/civilization/civilization';
 
 function App() {
   return (
