@@ -27,11 +27,14 @@ const Home = () => {
         },
     }))(TableCell);
       
-    const StyledTableRow = withStyles((theme) => ({
+    const StyledTableRow = withStyles(() => ({
       root: {
-        '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
-        },
+          '&:nth-of-type(odd)': {
+              background: 'linear-gradient(45deg, #b39ddb 30%, #9fa8da 90%)',
+          },
+          '&:nth-of-type(even)': {
+              background: 'linear-gradient(45deg, #9fa8da 30%, #b39ddb 90%)',
+          },
       },
     }))(TableRow);
 

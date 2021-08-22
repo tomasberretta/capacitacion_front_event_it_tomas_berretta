@@ -29,7 +29,7 @@ function Civilization() {
     else return (
         <Box mt={2} >
             <Container maxWidth="lg">
-                <Card>
+                <Card style={{ background: 'linear-gradient(45deg, #b39ddb 30%, #9fa8da 90%'}}>
                     <CardContent>
                         <Box mt={1} mx={2}>
                             <Box mb={1} fontWeight='fontWeightBold'>
@@ -42,33 +42,33 @@ function Civilization() {
                         <Grid container>
                             <Grid item xs={12}>
                                 <Box mt={1} mx={2}>
-                                    <Typography component='div' variant="h5" color="textSecondary">
+                                    <Typography component='div' variant="h5">
                                         <Box fontWeight='fontWeightMedium' display='inline'>Expansion: </Box> {expansion}
                                     </Typography>
                                 </Box>
                             </Grid>
                             <Grid item xs={12}>
                                 <Box mt={1} mx={2}>
-                                    <Typography component='div' variant="h5" color="textSecondary">
+                                    <Typography component='div' variant="h5">
                                         <Box fontWeight='fontWeightMedium' display='inline'>Army Type: </Box> {army_type}
                                     </Typography>
                                 </Box>
                             </Grid>
                             <Grid item xs={12} m={1} >
                                 <Box mt={1} mx={2}>
-                                    <Typography component='div' variant="h5" color="textSecondary">
+                                    <Typography component='div' variant="h5">
                                         <Box fontWeight='fontWeightMedium' display='inline'>Team Bonus: </Box> {team_bonus}
                                     </Typography>
                                 </Box>
                             </Grid>
                             <Grid item xs={12} m={1} >
-                                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')} elevation={0}>
+                                <Accordion expanded={expanded === 'panel4'} onChange={handleChange('panel4')} elevation={0} style={{ background: 'inherit'}}>
                                     <AccordionSummary
                                         expandIcon={<ExpandMoreIcon color={"primary"} />}
                                         aria-controls="panel4bh-content"
                                         id="panel4bh-header"
                                     >
-                                        <Typography component='div' variant="h5" color="textSecondary" >
+                                        <Typography component='div' variant="h5" >
                                             <Box fontWeight='fontWeightMedium' display='inline'>Civilization Bonuses</Box>
                                         </Typography>
                                     </AccordionSummary>
@@ -78,7 +78,7 @@ function Civilization() {
                                             {civilization_bonus?.map((bonus) =>(
                                                 <Grid item xs={12} key={bonus}>
                                                     <Box>
-                                                        <Typography variant="h5" color="textSecondary">
+                                                        <Typography variant="h5">
                                                             {"· "+ bonus }
                                                         </Typography>
                                                     </Box>
