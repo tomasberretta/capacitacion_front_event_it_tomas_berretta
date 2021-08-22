@@ -1,5 +1,4 @@
 import {
-    Link,
     Container,
     Table,
     Box,
@@ -9,22 +8,23 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Typography
+    TablePagination, TableFooter, Button, CircularProgress
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {useHome} from "./useHome";
+import {NavLink} from "react-router-dom";
 
 const Home = () => {
-    const {civilizations, loading} = useHome()
+    const {civilizations, loading, page, handleChangePage} = useHome()
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
-          backgroundColor: theme.palette.common.black,
+          backgroundColor: theme.palette.primary.dark,
           color: theme.palette.common.white,
-          fontSize: 18,
+          fontSize: 24,
         },
         body: {
-          fontSize: 16,
+          fontSize: 22,
         },
     }))(TableCell);
       
@@ -38,53 +38,71 @@ const Home = () => {
 
     const useStyles = makeStyles({
       table: {
-        minWidth: 300,
+        minWidth: 240,
       },
     });
 
     const classes = useStyles();
 
     if (loading) return (
-        <Box mt={2}>
-            <Container maxWidth="md">
-                <Typography variant="h5" component="h2">
-                    Loading...
-                </Typography>
-            </Container>
+        <Box
+            mt={2}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+        >
+            <CircularProgress size={75} />
         </Box>
     )
 
-    return ( 
-        <Box mt={2}>
-          <Container maxWidth="sm" >
+    return (
+        <Box mt={2}
+             display={"flex"}
+             alignItems={"center"}
+             justifyContent={"center"}
+        >
+            <Container maxWidth="md" >
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="customized table">
                         <TableHead>
-                        <TableRow>
-                            <StyledTableCell>ID</StyledTableCell>
-                            <StyledTableCell align="left">Civilization</StyledTableCell>
-                        </TableRow>
+                            <TableRow>
+                                <StyledTableCell size={"small"} >ID</StyledTableCell>
+                                <StyledTableCell align="left">Civilization</StyledTableCell>
+                                <StyledTableCell align="left" size={"small"} padding={"none"}/>
+                            </TableRow>
                         </TableHead>
                         <TableBody>
-                        {civilizations.map((row) => (
-                            <StyledTableRow key={row.id}>
-                                <StyledTableCell component="th" scope="row">
-                                    <Link 
-                                    href={`/civilization/${row.id}`}
-                                    color="inherit" >
-                                      {row.id}
-                                    </Link>
-                                </StyledTableCell>
-                                <StyledTableCell align="left">
-                                    <Link 
-                                    href={`/civilization/${row.id}`}
-                                    color="inherit" >
-                                      {row.name}
-                                    </Link>
-                                </StyledTableCell>
-                            </StyledTableRow>
-                        ))}
+                            {civilizations.slice(page * 10, page * 10 + 10).map((row) => (
+                                <StyledTableRow key={row.id}>
+                                    <StyledTableCell component="th" scope="row" size={"small"}>
+                                        {row.id}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="left" >
+                                        {row.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right" size={"small"} >
+                                        <NavLink
+                                            to={`/civilization/${row.id}`}
+                                            color="inherit" >
+                                            <Button color="primary" variant="contained">
+                                                View
+                                            </Button>
+                                        </NavLink>
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
                         </TableBody>
+                        <TableFooter>
+                            <StyledTableRow>
+                                <TablePagination
+                                    rowsPerPageOptions={[10]}
+                                    count={civilizations.length}
+                                    rowsPerPage={10}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                />
+                            </StyledTableRow>
+                        </TableFooter>
                     </Table>
                 </TableContainer>
             </Container>

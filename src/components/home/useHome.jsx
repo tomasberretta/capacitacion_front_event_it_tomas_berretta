@@ -4,6 +4,11 @@ import { fetchCivilizations} from "../../fetchers/CivilizationFetcher";
 export const useHome = () => {
     const [civilizations, setCivilizations] = useState([]);
     const [loading, setLoading] = useState(false)
+    const [page, setPage] = useState(0);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
     useEffect (()=> {
         document.title = 'Home'
@@ -15,5 +20,5 @@ export const useHome = () => {
             })
     }, []);
 
-    return {civilizations, loading}
+    return {civilizations, loading, page, handleChangePage}
 }

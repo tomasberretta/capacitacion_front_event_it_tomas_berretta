@@ -1,38 +1,29 @@
 import '@fontsource/roboto';
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-import { SvgIcon, AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
-
+import {ThemeProvider} from '@material-ui/core/styles'
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Home from './components/home/home';
 import Civilization from './components/civilization/civilization';
 
+import Navbar from "./components/navbar/navbar";
+import theme from './theme'
+import {withTheme} from "@material-ui/core";
+
 function App() {
   return (
-    <Router>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-            <IconButton edge="start" aria-label="menu">
-              <NavLink to="/">
-                <SvgIcon>
-                  <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-                </SvgIcon>
-              </NavLink>
-            </IconButton>
-            <Typography variant="h6" color="inherit">
-              Civilizations
-            </Typography>
-          </Toolbar>
-      </AppBar>
-        
-      <Switch>
-        <Route path="/" exact>
-          <Home/>
-        </Route>
-        <Route path="/civilization/:id" >
-          <Civilization/>
-        </Route>
-      </Switch>
-    </Router>
+      <ThemeProvider theme={theme}>
+          <Router>
+              <Navbar/>
+              <Switch>
+                  <Route path="/" exact>
+                      <Home/>
+                  </Route>
+                  <Route path="/civilization/:id" >
+                      <Civilization/>
+                  </Route>
+              </Switch>
+          </Router>
+      </ThemeProvider>
   );
 }
 
-export default App;
+export default withTheme(App) ;
