@@ -8,14 +8,13 @@ import {
     TableHead,
     TableRow,
     Paper,
-    TablePagination, TableFooter, Button, CircularProgress
+    TablePagination, TableFooter, CircularProgress
 } from '@material-ui/core';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import {useHome} from "./useHome";
-import {NavLink} from "react-router-dom";
 
 const Home = () => {
-    const {civilizations, loading, page, handleChangePage} = useHome()
+    const {civilizations, loading, page, handleChangePage, onClick} = useHome()
 
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -68,26 +67,16 @@ const Home = () => {
                             <TableRow>
                                 <StyledTableCell size={"small"} >ID</StyledTableCell>
                                 <StyledTableCell align="left">Civilization</StyledTableCell>
-                                <StyledTableCell align="left" size={"small"} padding={"none"}/>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {civilizations.slice(page * 10, page * 10 + 10).map((row) => (
-                                <StyledTableRow key={row.id}>
+                                <StyledTableRow key={row.id} onClick={() => onClick(row.id)}>
                                     <StyledTableCell component="th" scope="row" size={"small"}>
                                         {row.id}
                                     </StyledTableCell>
                                     <StyledTableCell align="left" >
                                         {row.name}
-                                    </StyledTableCell>
-                                    <StyledTableCell align="right" size={"small"} >
-                                        <NavLink
-                                            to={`/civilization/${row.id}`}
-                                            color="inherit" >
-                                            <Button color="primary" variant="contained">
-                                                View
-                                            </Button>
-                                        </NavLink>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}

@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import { fetchCivilizations} from "../../fetchers/CivilizationFetcher";
+import {useHistory} from "react-router-dom";
 
 export const useHome = () => {
     const [civilizations, setCivilizations] = useState([]);
@@ -9,6 +10,12 @@ export const useHome = () => {
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
+
+    const history = useHistory();
+
+    function onClick(id) {
+        history.push("/civilization/" + id);
+    }
 
     useEffect (()=> {
         document.title = 'Home'
@@ -20,5 +27,5 @@ export const useHome = () => {
             })
     }, []);
 
-    return {civilizations, loading, page, handleChangePage}
+    return {civilizations, loading, page, handleChangePage, onClick}
 }
