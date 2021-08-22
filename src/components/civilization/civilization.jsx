@@ -76,8 +76,8 @@ function Civilization() {
                                     <AccordionDetails>
                                         <Grid container>
                                             {civilization_bonus?.map((bonus) =>(
-                                                <Grid item xs={12}>
-                                                    <Box key ={bonus}>
+                                                <Grid item xs={12} key={bonus}>
+                                                    <Box>
                                                         <Typography variant="h5" color="textSecondary">
                                                             {"· "+ bonus }
                                                         </Typography>
