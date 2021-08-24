@@ -29,7 +29,9 @@ function Civilization() {
     else return (
         <Box mt={2} >
             <Container maxWidth="lg">
+
                 <Card style={{background: 'linear-gradient(45deg, #b39ddb 30%, #9fa8da 90%)'}}>
+
                     <CardContent>
                         <Box mt={1} mx={2}>
                             <Box mb={1} fontWeight='fontWeightBold'>
